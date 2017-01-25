@@ -2,6 +2,7 @@
 
 use Anomaly\InstallerModule\Installer\Command\GetInstallers;
 use Anomaly\InstallerModule\Installer\Form\InstallerFormBuilder;
+use Anomaly\InstallerModule\Installer\InstallerThread;
 use Anomaly\InstallerModule\InstallerModuleInstaller;
 use Anomaly\Streams\Platform\Application\Command\ReloadEnvironmentFile;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
@@ -14,13 +15,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
 
-class InstallerThread extends Thread {
-    public function run($installers, $key, $container) {
-      $installer = $installers->get($key);
-      $container->call($installer->getTask());
-      $_SESSION["install_".$key] = true;
-    }
-}
+
 
 /**
  * Class InstallerController
