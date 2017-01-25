@@ -13,6 +13,15 @@ use Illuminate\Cache\CacheManager;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
+
+class InstallerThread extends Thread {
+    public function run($installers, $key, $container) {
+      $installer = $installers->get($key);
+      $container->call($installer->getTask());
+      $_SESSION["install_".$key] = true;
+    }
+}
+
 /**
  * Class InstallerController
  *
@@ -78,13 +87,11 @@ class InstallerController extends PublicController
      */
     public function run(Container $container, $key)
     {
+        $_SESSION["install_".$key] = false;
         $installers = $this->dispatch(new GetInstallers());
+        $thread = new InstallerThread();
+        $thread->start($installers, $key, $container);
 
-        /* @var Installer $installer */
-        $installer = $installers->get($key);
-
-        $container->call($installer->getTask());
-
-        return 'true';
+        return $_SESSION["install_".$key];
     }
 }
