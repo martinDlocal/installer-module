@@ -1,5 +1,5 @@
 {
-  "name": "martindlocal/installer-module",
+  "name": "anomaly/installer-module",
   "type": "streams-addon",
   "description": "The Streams Platform installer.",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Martindlocal\\InstallerModule\\": "src/"
+      "Anomaly\\InstallerModule\\": "src/"
     }
   }
 }
