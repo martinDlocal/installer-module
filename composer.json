@@ -23,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Anomaly\\InstallerModule\\": "src/"
+      "Martindlocal\\InstallerModule\\": "src/"
     }
   }
 }
